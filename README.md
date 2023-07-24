@@ -70,6 +70,9 @@ const styles = StyleSheet.create({
 | **`onDragEnd`**            | Callback function triggered when the FAB drag operation ends.                            | :white_large_square:         | function     |
 
 
+## Troubleshooting
+- Using PanResponder inside of a ScrollView or FlatList may cause the animation to get stuck. The solution that worked for me is to set the property "scrollEnabled" to "false". Take a look at this [Example](https://github.com/taingoo/react-native-animated-fab/blob/master/example/src/App.tsx)
+
 ## License
 
 [MIT](https://github.com/taingoo/react-native-animated-fab/blob/master/LICENSE)

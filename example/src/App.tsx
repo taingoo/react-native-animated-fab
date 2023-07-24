@@ -3,9 +3,14 @@ import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
 import FAB from 'react-native-animated-fab';
 
 export default function App() {
+  const [scrollEnabled, setScrollEnabled] = React.useState<boolean>(true);
+
   return (
     <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        scrollEnabled={scrollEnabled}
+      >
         <View style={styles.section}>
           <Text>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid
@@ -77,6 +82,8 @@ export default function App() {
         icon={require('./avatar.png')}
         iconSize={60}
         onPress={() => Alert.alert('FAB pressed !')}
+        onDragStart={() => setScrollEnabled(false)}
+        onDragEnd={() => setScrollEnabled(true)}
       />
     </View>
   );

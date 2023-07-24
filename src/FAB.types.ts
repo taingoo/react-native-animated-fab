@@ -4,6 +4,8 @@ import type {
   TouchableOpacityProps,
 } from 'react-native';
 
+export type IPosition = 'right' | 'left';
+
 export interface FABProps extends TouchableOpacityProps {
   /**
    * @description Specifies the size of the FAB.
@@ -82,5 +84,3 @@ export interface FABProps extends TouchableOpacityProps {
    */
   onDragEnd?: (state: PanResponderGestureState) => void;
 }
-
-export type IPosition = 'right' | 'left';
