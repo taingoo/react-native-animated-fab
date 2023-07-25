@@ -29,10 +29,10 @@ export const FAB: React.FC<FABProps> = ({
   idleOpacity = 0.5,
   idleDelayTime = 3000,
   children,
-  onPress = () => {},
-  onLongPress = () => {},
-  onDragStart = () => {},
-  onDragEnd = () => {},
+  onPress,
+  onLongPress,
+  onDragStart,
+  onDragEnd,
   ...touchableProps
 }) => {
   const [opacity, setOpacity] = useState<number>(idleOpacity);
@@ -46,7 +46,6 @@ export const FAB: React.FC<FABProps> = ({
   const wrapperStyle: (ViewStyle | any)[] = [
     { position: 'absolute' },
     { bottom: yOffset },
-    { opacity: opacity },
     position === 'right' && { right: xOffset },
     position === 'left' && { left: xOffset },
   ];
@@ -54,6 +53,7 @@ export const FAB: React.FC<FABProps> = ({
   const containerStyle: (ViewStyle | any)[] = [
     styles.defaultStyle,
     { width: renderSize, height: renderSize },
+    { opacity: opacity },
     borderRadius && { borderRadius: borderRadius },
     backgroundColor && { backgroundColor: backgroundColor },
   ];
@@ -85,18 +85,13 @@ export const FAB: React.FC<FABProps> = ({
   const panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: (_, gestureState) => {
-        onDragStart(gestureState);
-        return (
-          !!draggable &&
-          Math.abs(gestureState.dx) !== 0 &&
-          Math.abs(gestureState.dy) !== 0
-        );
+        onDragStart && onDragStart(gestureState);
+        return draggable && (gestureState.dx !== 0 || gestureState.dy !== 0);
       },
       onPanResponderGrant: () => {
         timer && clearTimeout(timer);
         pan.setOffset((pan as any).__getValue());
         pan.setValue({ x: 0, y: 0 });
-
         setOpacity(1);
       },
       onPanResponderMove: Animated.event([null, { dx: pan.x, dy: pan.y }], {
@@ -115,7 +110,7 @@ export const FAB: React.FC<FABProps> = ({
           }).start();
           pan.flattenOffset();
         }
-        onDragEnd(gestureState);
+        onDragEnd && onDragEnd(gestureState);
         timer = setTimeout(() => {
           setOpacity(idleOpacity);
         }, idleDelayTime);
