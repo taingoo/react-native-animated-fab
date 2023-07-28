@@ -24,8 +24,10 @@ export const FAB: React.FC<FABProps> = ({
   tintColor,
   borderRadius,
   backgroundColor,
-  xOffset = 16,
-  yOffset = 80,
+  topOffset = 80,
+  rightOffset = 16,
+  bottomOffset = 80,
+  leftOffset = 16,
   idleOpacity = 0.5,
   idleDelayTime = 3000,
   children,
@@ -35,19 +37,19 @@ export const FAB: React.FC<FABProps> = ({
   onDragEnd,
   ...touchableProps
 }) => {
-  const [opacity, setOpacity] = useState<number>(idleOpacity);
   const pan = useRef(new Animated.ValueXY()).current;
-  const HORIZONTAL_BOUNDS = -width + renderSize + 2 * xOffset;
-  const VERTICAL_BOUNDS = -height + renderSize + 2 * yOffset;
+  const [opacity, setOpacity] = useState<number>(idleOpacity);
+  const HORIZONTAL_BOUNDS = width - renderSize - (leftOffset + rightOffset);
+  const VERTICAL_BOUNDS = height - renderSize - (bottomOffset + topOffset);
   const HORIZONTAL_BOUNDS_RANGE =
-    position === 'right' ? [HORIZONTAL_BOUNDS, 0] : [0, -HORIZONTAL_BOUNDS];
-  const VERTICAL_BOUNDS_RANGE = [VERTICAL_BOUNDS, 0];
+    position === 'right' ? [-HORIZONTAL_BOUNDS, 0] : [0, HORIZONTAL_BOUNDS];
+  const VERTICAL_BOUNDS_RANGE = [-VERTICAL_BOUNDS, 0];
 
   const wrapperStyle: (ViewStyle | any)[] = [
     { position: 'absolute' },
-    { bottom: yOffset },
-    position === 'right' && { right: xOffset },
-    position === 'left' && { left: xOffset },
+    { bottom: bottomOffset },
+    position === 'right' && { right: rightOffset },
+    position === 'left' && { left: leftOffset },
   ];
 
   const containerStyle: (ViewStyle | any)[] = [

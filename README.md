@@ -59,8 +59,10 @@ const styles = StyleSheet.create({
 | **`tintColor`**             | Specifies the tint color for the icon.                                            | :white_large_square:         | string         | 
 | **`borderRadius`**            | Defines the border radius for the FAB.                                          | :white_large_square:         | number         | 0  
 | **`backgroundColor`**                 | Specifies the background color for the FAB.                                    | :white_large_square:         | string       | '#00000090' 
-| **`xOffset`**               | Defines the horizontal offset of the FAB.                        | :white_large_square:         | number         | 16 
-| **`yOffset`**                 | Defines the vertical offset of the FAB.                     | :white_large_square:         | number        | 80   
+| **`topOffset`**               | Defines the top offset of the FAB.                        | :white_large_square:         | number         | 80 
+| **`rightOffset`**                 | Defines the right offset of the FAB.                     | :white_large_square:         | number        | 16  
+| **`bottomOffset`**               | Defines the bottom offset of the FAB.                        | :white_large_square:         | number         | 80 
+| **`leftOffset`**                 | Defines the left offset of the FAB.                     | :white_large_square:         | number        | 16   
 | **`idleOpacity`**                 | Specifies the opacity of the FAB when it is idle. (value from 0 to 1)                    | :white_large_square:         | number        | 0.5   
 | **`idleDelayTime`**                 | Specifies the delay time before the FAB becomes idle. (value in ms)                  | :white_large_square:         | number        | 3000    
 | **`children`**                 |  Specifies additional JSX elements to be rendered inside the FAB.                   | :white_large_square:         | React component        |     
