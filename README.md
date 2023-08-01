@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
 | Prop                         | Description                                            | Required                     | Type           | Default                                   |
 | ---------------------------- | -------------------------------------------------------| :----------------------------------------------:| :------------------------------------------:|:------:
 | **`renderSize`**                  | Specifies the size of the FAB.                                       | :white_check_mark:           | number         |  
-| **`position`**                 | Defines the position of the FAB relative to its parent container.                                      | :white_large_square:           | 'right' \| 'left' | 'right'    
 | **`draggable`**           | Indicates whether the FAB is draggable.                    | :white_large_square:         | boolean         | true                               
 | **`reversible`**         | Specifies if the FAN can be reverted to the original position.                                   | :white_large_square:         | boolean         | false
 | **`icon`**       | Determines if the FAB displays an icon.                                     | :white_large_square:         | number         |   
@@ -59,9 +58,9 @@ const styles = StyleSheet.create({
 | **`tintColor`**             | Specifies the tint color for the icon.                                            | :white_large_square:         | string         | 
 | **`borderRadius`**            | Defines the border radius for the FAB.                                          | :white_large_square:         | number         | 0  
 | **`backgroundColor`**                 | Specifies the background color for the FAB.                                    | :white_large_square:         | string       | '#00000090' 
-| **`topOffset`**               | Defines the top offset of the FAB.                        | :white_large_square:         | number         | 80 
+| **`topOffset`**               | Defines the top offset of the FAB.                        | :white_large_square:         | number         | 60 
 | **`rightOffset`**                 | Defines the right offset of the FAB.                     | :white_large_square:         | number        | 16  
-| **`bottomOffset`**               | Defines the bottom offset of the FAB.                        | :white_large_square:         | number         | 80 
+| **`bottomOffset`**               | Defines the bottom offset of the FAB.                        | :white_large_square:         | number         | 60 
 | **`leftOffset`**                 | Defines the left offset of the FAB.                     | :white_large_square:         | number        | 16   
 | **`idleOpacity`**                 | Specifies the opacity of the FAB when it is idle. (value from 0 to 1)                    | :white_large_square:         | number        | 0.5   
 | **`idleDelayTime`**                 | Specifies the delay time before the FAB becomes idle. (value in ms)                  | :white_large_square:         | number        | 3000    

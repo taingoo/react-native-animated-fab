@@ -15,7 +15,6 @@ let timer: NodeJS.Timeout;
 
 export const FAB: React.FC<FABProps> = ({
   renderSize,
-  position = 'right',
   draggable = true,
   reversible = false,
   icon = ICONS.iconDefault,
@@ -24,9 +23,9 @@ export const FAB: React.FC<FABProps> = ({
   tintColor,
   borderRadius,
   backgroundColor,
-  topOffset = 80,
+  topOffset = 60,
   rightOffset = 16,
-  bottomOffset = 80,
+  bottomOffset = 60,
   leftOffset = 16,
   idleOpacity = 0.5,
   idleDelayTime = 3000,
@@ -41,15 +40,12 @@ export const FAB: React.FC<FABProps> = ({
   const [opacity, setOpacity] = useState<number>(idleOpacity);
   const HORIZONTAL_BOUNDS = width - renderSize - (leftOffset + rightOffset);
   const VERTICAL_BOUNDS = height - renderSize - (bottomOffset + topOffset);
-  const HORIZONTAL_BOUNDS_RANGE =
-    position === 'right' ? [-HORIZONTAL_BOUNDS, 0] : [0, HORIZONTAL_BOUNDS];
   const VERTICAL_BOUNDS_RANGE = [-VERTICAL_BOUNDS, 0];
 
   const wrapperStyle: (ViewStyle | any)[] = [
     { position: 'absolute' },
     { bottom: bottomOffset },
-    position === 'right' && { right: rightOffset },
-    position === 'left' && { left: leftOffset },
+    { right: rightOffset },
   ];
 
   const containerStyle: (ViewStyle | any)[] = [
@@ -68,13 +64,7 @@ export const FAB: React.FC<FABProps> = ({
   };
 
   const transform = [
-    {
-      translateX: pan.x.interpolate({
-        inputRange: HORIZONTAL_BOUNDS_RANGE,
-        outputRange: HORIZONTAL_BOUNDS_RANGE,
-        extrapolate: 'clamp',
-      }),
-    },
+    { translateX: pan.x },
     {
       translateY: pan.y.interpolate({
         inputRange: VERTICAL_BOUNDS_RANGE,
@@ -106,11 +96,18 @@ export const FAB: React.FC<FABProps> = ({
             useNativeDriver: false,
           }).start();
         } else {
+          let newX = 0;
+          let xValue = (pan.x as any)._value;
+          let centerHorizontal = (width - renderSize) / 2;
+          if (xValue > 0) {
+            newX = Math.abs(xValue) > centerHorizontal ? HORIZONTAL_BOUNDS : 0;
+          } else {
+            newX = Math.abs(xValue) > centerHorizontal ? -HORIZONTAL_BOUNDS : 0;
+          }
           Animated.spring(pan, {
-            toValue: { x: 0, y: (pan.y as any)._value },
+            toValue: { x: newX, y: (pan.y as any)._value },
             useNativeDriver: false,
           }).start();
-          pan.flattenOffset();
         }
         onDragEnd && onDragEnd(gestureState);
         timer = setTimeout(() => {

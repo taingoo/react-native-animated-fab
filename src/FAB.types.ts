@@ -4,23 +4,17 @@ import type {
   TouchableOpacityProps,
 } from 'react-native';
 
-export type IPosition = 'right' | 'left';
-
 export interface FABProps extends TouchableOpacityProps {
   /**
    * @description Specifies the size of the FAB.
    */
   renderSize: number;
   /**
-   * @description Defines the position of the FAB relative to its parent container.
-   */
-  position?: IPosition;
-  /**
    * @description Indicates whether the FAB is draggable.
    */
   draggable?: boolean;
   /**
-   * @description Specifies if the FAN can be reverted to the original position.
+   * @description Specifies if the FAB can be reverted to the original position.
    */
   reversible?: boolean;
   /**
